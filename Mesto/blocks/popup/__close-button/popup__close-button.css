@@ -4,7 +4,7 @@
   position: absolute;
   background: transparent;
   border: none;
-  background-image: url(../../../images/close-ikon.svg);
+  background-image: url(../../../images/close-ikon.png);
   z-index: 5;
   top: 155px;
   left: calc(100% / 2 + 223px);
