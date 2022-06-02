@@ -24,3 +24,8 @@ formElement.onclick = function (evt) {
     statusText.textContent = jobInput.value;
     closeProfile();
   };
+
+ let likeButtons = document.querySelectorAll('.element__like-button');
+  for (const button of likeButtons) {
+  button.addEventListener('click', () => button.classList.toggle('element__like-button_active'));
+}
