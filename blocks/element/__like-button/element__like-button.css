@@ -7,8 +7,9 @@
   align-self: center;
   flex-shrink: 0;
   padding: 0;
+  cursor: pointer;
 }
 
 .element__like-button:hover {
-  opacity: 0.5;
+  opacity: 0.6;
 }

@@ -12,6 +12,7 @@
   margin-top: 48px;
   border: none;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .popup__save-button:hover {
