@@ -27,6 +27,7 @@
     <section class="elements">
       <div class="popup popup_profile">
         <div class="popup__container">
+          <button class="popup__close-button" type="button"></button>
           <h2 class="popup__title">Редактировать профиль</h2>
           <form class="popup__form-container">
             <input class="popup__input popup__input_username" type="text" value="Жак-Ив Кусто">
@@ -36,10 +37,10 @@
             </button>
           </form> 
         </div>
-        <button class="popup__close-button" type="button"></button>
       </div>
       <div class="popup popup_mesto">
         <div class="popup__container">
+          <button class="popup__close-button popup__mesto-close-button" type="button"></button>
           <h2 class="popup__title">Новое место</h2>
           <form class="popup__form-container">
             <input class="popup__input popup__input_photo-name" type="text" placeholder="Название">
@@ -49,7 +50,14 @@
             </button>
           </form> 
         </div>
-        <button class="popup__close-button popup__mesto-close-button" type="button"></button>
+        
+      </div>
+      <div class="popup popup_photo">
+        <div class="popup__photo-container">
+          <button class="popup__close-button popup__close-button_photo-close-button" type="button"></button>
+          <img class="popup__image" src="" alt="Тут должно быть фото, но что-то пошло не так">
+          <h2 class="popup__image-text"></h2>
+        </div>
       </div>
     </section>
  

@@ -10,7 +10,16 @@ const nameText = document.querySelector('.profile__username');
 const statusText = document.querySelector('.profile__status');
 const addButton = document.querySelector('.profile__add-button');
 const newCard = document.querySelector('.element');
+const renderCardButton = document.querySelector('.popup_add-card-button');
+const cardName = document.querySelector('.element__text');
+const cardPhoto = document.querySelector('.element__photo');
+const closeButtonMesto = document.querySelector('.popup__mesto-close-button');
+const photoLinkInput = document.querySelector('.popup__input_photo-link');
+const photoNameInput = document.querySelector('.popup__input_photo-name');
+const cardsHolder = document.querySelector('.elements');
+const popupPhoto = document.querySelector('.popup_photo');
 
+/*отсюда создаются начальные карточки*/
 const initialCards = [
   {
     name: 'Архыз',
@@ -38,41 +47,41 @@ const initialCards = [
   }
 ]; 
 
+const openPhoto = function(element) {
+  popupPhoto.classList.add('popup_opened');
+  const cardName = element.querySelector('.element__text');
+  const cardPhoto = element.querySelector('.element__photo');
+  popupPhoto.querySelector('.popup__image-text').textContent = cardName.textContent;
+  popupPhoto.querySelector('.popup__image').src = cardPhoto.src;
+};
+
 initialCards.forEach(function (element) {
   const templateBlock = document.querySelector('.template-element').content;
-  const cardsHolder1 = document.querySelector('.elements');
   const blockToClone = templateBlock.querySelector('.element').cloneNode(true);
+  blockToClone.querySelector('.element__photo').addEventListener('click', function (e) {
+  openPhoto(e.target.closest(".element"))});
+  blockToClone.querySelector('.element__like-button').addEventListener('click', function (evt) {evt.target.classList.toggle('element__like-button_active');}); 
+  blockToClone.querySelector('.element__remove-button').addEventListener('click', function (evt) {evt.target.closest('.element').remove();}); 
   blockToClone.querySelector('.element__text').textContent = element.name; 
   blockToClone.querySelector('.element__photo').src = element.link;
-  cardsHolder1.prepend(blockToClone);});
+  cardsHolder.prepend(blockToClone);});
 
+/*тут кнопка редактирования профиля*/
 function editProfile() {popupProfile.classList.add('popup_opened')};
 editButton.addEventListener('click', editProfile); 
 
-
-const cardRemoveButtons = document.querySelectorAll('.element__remove-button');
-for (const button of cardRemoveButtons) {
-  button.addEventListener('click', () => button.closest('.element').remove());
-}
-
-const likeButtons = document.querySelectorAll('.element__like-button');
-for (const button of likeButtons) {button.addEventListener ('click', function (e) {e.target.classList.toggle('element__like-button_active')})};
-
-
+/*тут общее правило для закрывающих кнопок*/
 let closeButtons = document.querySelectorAll('.popup__close-button');
-console.log(closeButtons);
 for (const button of closeButtons) {
-button.addEventListener('click', () => button.closest('.popup').classList.remove('popup_opened'));
-}
+button.addEventListener('click', () => button.closest('.popup').classList.remove('popup_opened'));}
 
-
-
+/*а тут - без сохранения значения для профиля*/
 function closeProfilePopup() {popupProfile.classList.remove('popup_opened');
 nameInput.value = nameText.textContent;
-jobInput.value = statusText.textContent;
-}
+jobInput.value = statusText.textContent;}
 closeButton.addEventListener('click', closeProfilePopup); 
 
+/*сохранение изменений в профиле*/
 const profileSaveButton = document.querySelector('.popup__profile-save-button');
 profileSaveButton.onclick = function (evt) {
   evt.preventDefault();
@@ -80,19 +89,12 @@ profileSaveButton.onclick = function (evt) {
   statusText.textContent = jobInput.value;
   closeProfilePopup();
 };
-  
 
-
+/*открытие попапа добавления фото*/
 function editMesto() {popupMesto.classList.add('popup_opened')};
 addButton.addEventListener('click', editMesto); 
 
-const renderCardButton = document.querySelector('.popup_add-card-button');
-const cardName = document.querySelector('.element__text');
-const cardPhoto = document.querySelector('.element__photo');
-const closeButtonMesto = document.querySelector('.popup__mesto-close-button');
-const photoLinkInput = document.querySelector('.popup__input_photo-link');
-const photoNameInput = document.querySelector('.popup__input_photo-name');
-
+/*его закрытие с обнулением инпутов*/
 function closeMestoPopup() {
   popupMesto.classList.remove('popup_opened');
   photoNameInput.value = "";
@@ -100,34 +102,23 @@ function closeMestoPopup() {
 }
 closeButtonMesto.addEventListener('click', closeMestoPopup); 
 
-
+/*добавление карточки*/
 function addCard(photoLinkInput, photoNameInput) {
   const templateBlock = document.querySelector('.template-element').content;
-  const cardsHolder = document.querySelector('.elements');
   const blockToClone = templateBlock.querySelector('.element').cloneNode(true);
   blockToClone.querySelector('.element__like-button').addEventListener('click', function (evt) {evt.target.classList.toggle('element__like-button_active');}); 
   blockToClone.querySelector('.element__remove-button').addEventListener('click', function (evt) {evt.target.closest('.element').remove();}); 
-   
   blockToClone.querySelector('.element__text').textContent = photoNameInput;
   blockToClone.querySelector('.element__photo').setAttribute('src', photoLinkInput);
+  blockToClone.querySelector('.element__photo').addEventListener('click', function (e) {
+    openPhoto(e.target.closest(".element"))});
   cardsHolder.prepend(blockToClone);
 }
 
-  
 renderCardButton.addEventListener('click', function (evt) {
   evt.preventDefault();
-  const photoLinkInput = document.querySelector('.popup__input_photo-link');
-  const photoNameInput = document.querySelector('.popup__input_photo-name');
   addCard(photoLinkInput.value, photoNameInput.value);
-     
   photoLinkInput.value = '';
   photoNameInput.value = '';
   closeMestoPopup()
 });
-  for (const button of cardRemoveButtons) {
-  button.addEventListener('click', () => button.closest('.element').remove());
-};
-
-
- 
-
