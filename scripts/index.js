@@ -64,19 +64,14 @@ initialCards.forEach(function (element) {
 /*тут кнопка редактирования профиля*/
 function editProfile() {
   openPopup(popupProfile);
+  nameInput.value = nameText.textContent;
+  jobInput.value = statusText.textContent;
 };
 editProfileButton.addEventListener('click', editProfile); 
 
 const closeButtons = document.querySelectorAll('.popup__close-button');
 for (const button of closeButtons) 
   button.addEventListener('click', () => button.closest('.popup').classList.remove('popup_opened'));
-
-/*а тут - без сохранения значения для профиля*/
-function closeProfilePopup() {
-  closePopup(popupProfile);
-  nameInput.value = nameText.textContent;
-  jobInput.value = statusText.textContent;
-};
 
 inputProfileForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
