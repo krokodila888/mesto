@@ -12,8 +12,8 @@ const photoNameInput = document.querySelector('.popup__input_photo-name');
 const cardsHolder = document.querySelector('.elements');
 const popupPhoto = document.querySelector('.popup_photo');
 const profileSaveButton = document.querySelector('.popup__profile-save-button');
-const inputPhotoForm = document.querySelector(".popup__mesto-form-container");
-const inputProfileForm = document.querySelector(".popup__profile-form-container");
+const popupMestoForm = document.querySelector(".popup__mesto-form-container");
+const popupProfileForm = document.querySelector(".popup__profile-form-container");
 const templateBlock = document.querySelector('.template-element');
 
 function closePopup(element) {
@@ -32,33 +32,29 @@ const openPhoto = function(element) {
   popupPhoto.querySelector('.popup__image').src = cardPhoto.src;
 };
 
-const createCard = function() {
+const createCard = function(cardText, cardUrl) {
   const newCard = templateBlock.content.querySelector('.element').cloneNode(true);
   newCard.querySelector('.element__photo').addEventListener('click', function (e) {
     openPhoto(e.target.closest(".element"))
-});
+    });
   newCard.querySelector('.element__like-button').addEventListener('click', function (evt) {
     evt.target.classList.toggle('element__like-button_active');
-}); 
+    }); 
   newCard.querySelector('.element__remove-button').addEventListener('click', function (evt) {
     evt.target.closest('.element').remove();
-}); 
+    }); 
+    newCard.querySelector('.element__text').textContent = cardText;
+    newCard.querySelector('.element__photo').setAttribute('src', cardUrl);  
   cardsHolder.prepend(newCard);
   return newCard;
 };
 
 function renderCard(photoLinkInput, photoNameInput) {
-  const newCard = createCard();
-  newCard.querySelector('.element__text').textContent = photoNameInput;
-  newCard.querySelector('.element__photo').setAttribute('src', photoLinkInput);
-  cardsHolder.prepend(newCard);
+  cardsHolder.prepend(createCard(photoNameInput, photoLinkInput));
 };
 
 initialCards.forEach(function (element) {
-  const newCard = createCard();
-  newCard.querySelector('.element__text').textContent = element.name; 
-  newCard.querySelector('.element__photo').src = element.link;
-  cardsHolder.prepend(newCard);
+  cardsHolder.prepend(createCard(element.name, element.link));
 });
 
 /*тут кнопка редактирования профиля*/
@@ -73,7 +69,7 @@ const closeButtons = document.querySelectorAll('.popup__close-button');
 for (const button of closeButtons) 
   button.addEventListener('click', () => button.closest('.popup').classList.remove('popup_opened'));
 
-inputProfileForm.addEventListener('submit', function (evt) {
+popupProfileForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
   nameText.textContent = nameInput.value;
   statusText.textContent = jobInput.value;
@@ -81,13 +77,14 @@ inputProfileForm.addEventListener('submit', function (evt) {
 });
 
 /*открытие попапа добавления фото*/
-function editMesto() {
+function addMesto() {
   openPopup(popupMesto);
   photoLinkInput.value = '';
-  photoNameInput.value = '';};
-addCardButton.addEventListener('click', editMesto); 
+  photoNameInput.value = '';
+  };
+addCardButton.addEventListener('click', addMesto); 
 
-inputPhotoForm.addEventListener('submit', function (evt) {
+popupMestoForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
   renderCard(photoLinkInput.value, photoNameInput.value);
   closePopup(popupMesto);
