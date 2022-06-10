@@ -36,25 +36,25 @@ const createCard = function(cardText, cardUrl) {
   const newCard = templateBlock.content.querySelector('.element').cloneNode(true);
   newCard.querySelector('.element__photo').addEventListener('click', function (e) {
     openPhoto(e.target.closest(".element"))
-    });
+  });
   newCard.querySelector('.element__like-button').addEventListener('click', function (evt) {
     evt.target.classList.toggle('element__like-button_active');
-    }); 
+  }); 
   newCard.querySelector('.element__remove-button').addEventListener('click', function (evt) {
     evt.target.closest('.element').remove();
-    }); 
+  }); 
     newCard.querySelector('.element__text').textContent = cardText;
     newCard.querySelector('.element__photo').setAttribute('src', cardUrl);  
   cardsHolder.prepend(newCard);
   return newCard;
 };
 
-function renderCard(photoLinkInput, photoNameInput) {
-  cardsHolder.prepend(createCard(photoNameInput, photoLinkInput));
+function renderCard(element) {
+  cardsHolder.prepend(element);
 };
 
 initialCards.forEach(function (element) {
-  cardsHolder.prepend(createCard(element.name, element.link));
+  renderCard(createCard(element.name, element.link));
 });
 
 /*тут кнопка редактирования профиля*/
@@ -81,12 +81,12 @@ function addMesto() {
   openPopup(popupMesto);
   photoLinkInput.value = '';
   photoNameInput.value = '';
-  };
+};
 addCardButton.addEventListener('click', addMesto); 
 
 popupMestoForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
-  renderCard(photoLinkInput.value, photoNameInput.value);
+  renderCard(createCard(photoNameInput.value, photoLinkInput.value));
   closePopup(popupMesto);
 });
 
