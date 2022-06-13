@@ -20,15 +20,19 @@ function closePopup(element) {
   element.classList.remove('popup_opened');
 };
 
-function keyHandler(evt) {
-  if (evt.key === "Escape") {
-    closePopup(popupProfile); closePopup(popupMesto); closePopup(popupPhoto);
-  }};
+function closePopupByKeyOrClick() {
+  closePopup(popupProfile); closePopup(popupMesto); closePopup(popupPhoto);
+};
 
-document.addEventListener('keydown', keyHandler);
+function keyHandler(evt) {
+  if (evt.key === "Escape") {closePopupByKeyOrClick();
+  document.removeEventListener('keydown', keyHandler);}
+};
 
 function openPopup(element) {
   element.classList.add('popup_opened');
+  document.addEventListener('keydown', keyHandler);
+  document.addEventListener('dblclick', dblclickHandler);
 };
 
 
@@ -100,7 +104,8 @@ popupMestoForm.addEventListener('submit', function (evt) {
 
 function dblclickHandler(evt) {
   if (evt.target.className != "popup__content") {
-    closePopup(popupProfile); closePopup(popupMesto); closePopup(popupPhoto);
+    closePopupByKeyOrClick();
+    document.removeEventListener('dblclick', dblclickHandler);
   }};
 
-document.addEventListener('dblclick', dblclickHandler)
+
