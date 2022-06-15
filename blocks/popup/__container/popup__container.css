@@ -9,7 +9,8 @@
   justify-content: space-between;
   align-content: center;
   flex-basis: auto;
-  position: relative;
+  align-self: center;
+  position: fixed; 
   top: 195px;
   z-index: 2;
   padding: 34px 36px 37px 36px;

@@ -19,25 +19,24 @@ const elementTemplateBlock = document.querySelector('.template-element');
 function closePopup(element) {
   element.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByKey);
-  document.removeEventListener('click', closeByClick);
+  element.removeEventListener('mousedown', closeByClick);
 };
 
 function openPopup(element) {
   element.classList.add('popup_opened');
   document.addEventListener('keydown', closeByKey);
-  document.addEventListener('click', closeByClick);
+  element.addEventListener('mousedown', closeByClick);
 };
 
 function closeByClick(evt) {
   if (evt.target.classList.contains('popup')) {
-    closePopup(evt.target.closest('.popup'));
+    closePopup(evt.target);
   }
 };
 
 function closeByKey(evt) {
   if (evt.key === "Escape") {
-    const popupList = Array.from(document.querySelectorAll('.popup'));
-    popupList.forEach(closePopup)
+    closePopup(document.querySelector('.popup_opened'));
   }
 };
 
