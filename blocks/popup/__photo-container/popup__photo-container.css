@@ -1,0 +1,10 @@
+.popup__photo-container {
+  align-self: center;
+  position: fixed; 
+  top: 90px;
+}
+
+@media screen and (max-width: 500px) {
+  .popup__photo-container {
+    top: 136px;}
+}
