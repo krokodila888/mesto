@@ -81,6 +81,8 @@ function editProfile() {
   openPopup(popupProfile);
   nameInput.value = nameText.textContent;
   jobInput.value = statusText.textContent;
+  popupProfile.querySelector('.input-username-error').textContent = "";
+  popupProfile.querySelector('.input-status-error').textContent = ""; 
 };
 profileEditButton.addEventListener('click', editProfile); 
 
@@ -102,6 +104,8 @@ function addMesto() {
   photoNameInput.value = '';
   popupCardButton.disabled = true;
   popupCardButton.classList.add('popup__save-button_disabled');
+  popupMesto.querySelector('.input-photo-name-error').textContent = "";
+  popupMesto.querySelector('.input-photo-link-error').textContent = "";
 };
 profileAddButton.addEventListener('click', addMesto); 
 
