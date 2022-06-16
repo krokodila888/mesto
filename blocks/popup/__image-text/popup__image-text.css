@@ -4,7 +4,7 @@
   line-height: 15px;
   color: #FFFFFF;
   z-index: 5;
-  position: relative;
   margin: 0;
-  padding-top: 10px;
+  position: absolute;
+  bottom: -25px;
 }
