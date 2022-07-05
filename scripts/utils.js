@@ -1,4 +1,6 @@
 /*В слаке на вопрос о том, дублировать код для общих функций или импортировать его из index.js направо и налево наставник написал, что можно создать четвертый файл*/
+const popupPhoto = document.querySelector('.popup_photo');
+const popupImage = popupPhoto.querySelector('.popup__image');
 
 export function closePopup(element) {
   element.classList.remove('popup_opened');
@@ -25,11 +27,10 @@ export function closeByKey(evt) {
 };
   
 export const openPhoto = function(element) {
-  const popupPhoto = document.querySelector('.popup_photo');
   openPopup(popupPhoto);
   const cardName = element.querySelector('.element__text');
   const cardPhoto = element.querySelector('.element__photo');
   popupPhoto.querySelector('.popup__image-text').textContent = cardName.textContent;
-  popupPhoto.querySelector('.popup__image').src = cardPhoto.src;
-  popupPhoto.querySelector('.popup__image').alt = cardName.textContent;
+  popupImage.src = cardPhoto.src;
+  popupImage.alt = cardName.textContent;
 };

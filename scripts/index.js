@@ -9,7 +9,8 @@ const enableValidationClasses = ({
   submitButtonSelector: '.popup__save-button',
   inactiveButtonClass: 'popup__save-button_disabled',
   inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error'
+  errorClass: 'popup__input-error',
+  inputErrorBorder: 'popup__input-border',
   }
 );
 
@@ -21,14 +22,13 @@ const jobInput = document.querySelector('.popup__input_status');
 const nameText = document.querySelector('.profile__username');
 const statusText = document.querySelector('.profile__status');
 const profileAddButton = document.querySelector('.profile__add-button');
-const popupCardButton = document.querySelector('.popup__add-card-button');
 const photoLinkInput = document.querySelector('.popup__input_photo-link');
 const photoNameInput = document.querySelector('.popup__input_photo-name');
 const cardsHolder = document.querySelector('.elements');
-const popupMestoForm = document.querySelector(".popup__mesto-form-container");
-const popupProfileForm = document.querySelector(".popup__profile-form-container");
+const popupMestoForm = document.querySelector('.popup__mesto-form-container');
+const popupProfileForm = document.querySelector('.popup__profile-form-container');
 
-const createCard = function(cardText, cardUrl, cardSelector) {
+const createCard = function(cardText, cardUrl, cardSelector='.template-element') {
   const card = new Card(cardText, cardUrl, cardSelector);
   const cardElement = card.generateCard();
   return cardElement;
@@ -39,7 +39,7 @@ function renderCard(element) {
 };
 
 initialCards.forEach((item) => {
-  renderCard(createCard(item.name, item.link, '.template-element'));
+  renderCard(createCard(item.name, item.link));
   }
 );
 
@@ -48,8 +48,7 @@ function editProfile() {
   openPopup(popupProfile);
   nameInput.value = nameText.textContent;
   jobInput.value = statusText.textContent;
-  popupProfile.querySelector('.input-username-error').textContent = "";
-  popupProfile.querySelector('.input-status-error').textContent = ""; 
+  validationProfile.resetValidation();
 };
 profileEditButton.addEventListener('click', editProfile); 
 
@@ -67,32 +66,21 @@ popupProfileForm.addEventListener('submit', function (evt) {
 /*открытие попапа добавления фото*/
 function addMesto() {
   openPopup(popupMesto);
-  photoLinkInput.value = '';
-  photoNameInput.value = '';
-  popupCardButton.disabled = true;
-  popupCardButton.classList.add('popup__save-button_disabled');
-  popupMesto.querySelector('.input-photo-name-error').textContent = "";
-  popupMesto.querySelector('.input-photo-link-error').textContent = "";
+  popupMestoForm.reset();
+  validationMesto.resetValidation();
 };
 profileAddButton.addEventListener('click', addMesto); 
 
 popupMestoForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
-  renderCard(createCard(photoNameInput.value, photoLinkInput.value, '.template-element'));
+  renderCard(createCard(photoNameInput.value, photoLinkInput.value));
   closePopup(popupMesto);
+  /*evt.target.reset() при сабмите - отличная идея, спасибо. Но пришлось оставить reset на открытии: при закрытии формы без сабмита "черновик" оставался на месте*/
 });
 
-const validationProfile = function(enableValidationClasses, popupProfile) {
-  const validationForm = new FormValidator(enableValidationClasses, popupProfile);
-  const formProfile = validationForm.enableValidation();
-  return formProfile;
-};
+const validationProfile = new FormValidator(enableValidationClasses, popupProfileForm);
+const validationMesto = new FormValidator(enableValidationClasses, popupMestoForm);
 
-const validationMesto = function(enableValidationClasses, popupMesto) {
-  const validationForm = new FormValidator(enableValidationClasses, popupMesto);
-  const formMesto = validationForm.enableValidation();
-  return formMesto;
-};
-validationProfile(enableValidationClasses, popupProfile);
-validationMesto(enableValidationClasses, popupMesto);
+validationProfile.enableValidation();
+validationMesto.enableValidation();
 

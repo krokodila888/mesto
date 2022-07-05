@@ -1,4 +1,5 @@
 import { openPhoto } from './utils.js';
+/*сделать отдельную handleCardClick не смогла - она отчаянно ругалась тут, что is not a function*/
 
 export class Card {
   constructor(cardText, cardUrl, cardSelector) {
@@ -18,22 +19,22 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    this._cardImage = this._element.querySelector('.element__photo');
     this._element.querySelector('.element__text').textContent = this._cardText;
-    this._element.querySelector('.element__photo').src = this._cardUrl;
-    this._element.querySelector('.element__photo').alt = this._cardText;
+    this._cardImage.src = this._cardUrl;
+    this._cardImage.alt = this._cardText;
     this._setEventListeners();
     return this._element;
   }
 
   _setEventListeners() {
-    const likeButton = this._element.querySelector('.element__like-button');
-    const cardPhoto = this._element.querySelector('.element__photo');
+    this.likeButton = this._element.querySelector('.element__like-button');
 
-    likeButton.addEventListener('click', () => {
-      likeButton.classList.toggle('element__like-button_active');
+    this.likeButton.addEventListener('click', () => {
+      this.likeButton.classList.toggle('element__like-button_active');
       }
     );
-    cardPhoto.addEventListener('click', () => {
+    this._cardImage.addEventListener('click', () => {
       openPhoto(this._element)
       }
     );
