@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .popup__image-text {
   font-weight: 400;
   font-size: 12px;
@@ -7,4 +8,15 @@
   margin: 0;
   position: absolute;
   bottom: -25px;
+=======
+.popup__image-text {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FFFFFF;
+  z-index: 5;
+  margin: 0;
+  position: absolute;
+  bottom: -25px;
+>>>>>>> 27b3935dc5ca766894c64d777358fe21076411ce
 }

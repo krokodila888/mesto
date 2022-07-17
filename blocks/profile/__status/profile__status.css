@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .profile__status {
   font-style: normal;
   font-weight: 400;
@@ -15,4 +16,23 @@
     font-size: 14px;
     line-height: 17px;
     max-width: 282px;}
+=======
+.profile__status {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 336px;
+}
+
+@media screen and (max-width: 620px) {
+  .profile__status {
+    font-size: 14px;
+    line-height: 17px;
+    max-width: 282px;}
+>>>>>>> 27b3935dc5ca766894c64d777358fe21076411ce
 }

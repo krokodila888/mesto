@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .popup__input-error {
   font-weight: 400;
   font-size: 12px;
@@ -12,4 +13,20 @@
 @media screen and (max-width: 500px) {
   .popup__input-error {
       max-width: 238px;}
+=======
+.popup__input-error {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FF0000;
+  margin: 0;
+  padding-top: 5px;
+  min-height: 28px;
+  max-width: 358px;
+}
+
+@media screen and (max-width: 500px) {
+  .popup__input-error {
+      max-width: 238px;}
+>>>>>>> 27b3935dc5ca766894c64d777358fe21076411ce
 }

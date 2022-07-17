@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .element__like-button {
   width: 22px;
   height: 19px;
@@ -12,4 +13,20 @@
 
 .element__like-button:hover {
   opacity: 0.6;
+=======
+.element__like-button {
+  width: 22px;
+  height: 19px;
+  background-color: white;
+  background-image: url(../../../images/heart-empty.svg);
+  border: none;
+  align-self: center;
+  flex-shrink: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.element__like-button:hover {
+  opacity: 0.6;
+>>>>>>> 27b3935dc5ca766894c64d777358fe21076411ce
 }
