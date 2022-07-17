@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 .profile__avatar {
     width: 120px;
     height: 120px;
     border-radius: 50%; 
+=======
+.profile__avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; 
+>>>>>>> 27b3935dc5ca766894c64d777358fe21076411ce
 }

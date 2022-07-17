@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .popup__input {
   font-family: inherit;
   border: none;
@@ -18,4 +19,26 @@
 @media screen and (max-width: 500px) {
   .popup__input {
       max-width: 238px;}
+=======
+.popup__input {
+  font-family: inherit;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  color: #000000;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.popup__input:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 500px) {
+  .popup__input {
+      max-width: 238px;}
+>>>>>>> 27b3935dc5ca766894c64d777358fe21076411ce
 }

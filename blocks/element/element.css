@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .element {background-color: white;
   min-height: 361px;
   min-width: 282px;
@@ -8,4 +9,16 @@
 
 .element:hover {
   cursor: pointer;
+=======
+.element {background-color: white;
+  min-height: 361px;
+  min-width: 282px;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.element:hover {
+  cursor: pointer;
+>>>>>>> 27b3935dc5ca766894c64d777358fe21076411ce
 }

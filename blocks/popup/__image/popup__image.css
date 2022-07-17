@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 .popup__image {
   max-width: 75vw;
   max-height: 75vh;
   position: relative;
+=======
+.popup__image {
+  max-width: 75vw;
+  max-height: 75vh;
+  position: relative;
+>>>>>>> 27b3935dc5ca766894c64d777358fe21076411ce
 }

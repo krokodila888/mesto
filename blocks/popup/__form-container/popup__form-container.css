@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 .popup__form-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     font-family: inherit;
   }
+=======
+.popup__form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: inherit;
+  }
+>>>>>>> 27b3935dc5ca766894c64d777358fe21076411ce
   

@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 .element__photo {
     width: 282px;
     height: 282px;
     display: block;
     object-fit: cover;
+=======
+.element__photo {
+    width: 282px;
+    height: 282px;
+    display: block;
+    object-fit: cover;
+>>>>>>> 27b3935dc5ca766894c64d777358fe21076411ce
 }

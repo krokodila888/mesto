@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .popup__photo-container {
   align-self: center;
   position: fixed;
@@ -5,3 +6,12 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+=======
+.popup__photo-container {
+  align-self: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+>>>>>>> 27b3935dc5ca766894c64d777358fe21076411ce

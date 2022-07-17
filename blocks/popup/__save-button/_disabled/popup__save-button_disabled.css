@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .popup__save-button_disabled {
   opacity: 0.2;
   background-color: white;
@@ -9,4 +10,17 @@
 
 .popup__save-button_disabled:hover {
   opacity: 0.2;
+=======
+.popup__save-button_disabled {
+  opacity: 0.2;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  border-radius: 2px;
+  cursor: default;
+}
+
+.popup__save-button_disabled:hover {
+  opacity: 0.2;
+>>>>>>> 27b3935dc5ca766894c64d777358fe21076411ce
 }
