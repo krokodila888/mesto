@@ -3,30 +3,38 @@ import { Popup } from './Popup.js';
 export class PopupWithForm extends Popup {
   constructor(popupSelector, { callback } ) {
     super(popupSelector);
+    this._popup = document.querySelector(this._popupSelector);
     this._callback = callback;
     this._inputSelector = '.popup__input',
-    this._popupForm = this._popupSelector.querySelector('.popup__form-container');
+    this._popupForm = this._popup.querySelector('.popup__form-container');
+    this._inputList = this._popup.querySelectorAll(this._inputSelector);
   }
 
   setEventListeners () {
     super.setEventListeners();
     this._popupForm.addEventListener('submit', (evt) => {
       this._callback(evt)
-    }, { once: true })
+    })
   }
 
- getInputValues() {
-  this._inputList = Array.from(this._popupForm.querySelectorAll(this._inputSelector));
-  const inputArray = { userName: this._inputList[0].value, userText: this._inputList[1].value };
-  return inputArray;
-}
+  getInputValues() {
+    this._formValues = {};
+    this._inputList.forEach(input => {
+      this._formValues[input.name] = input.value;
+    });
+    return this._formValues;
+    } 
+ 
 
   close() {
-    this._popupForm.removeEventListener('submit', (evt) => {
-      this._callback(evt)
-    });
     super.close();
     this._popupForm.reset()
-    
+  }
+  
+  setInputValues(data) {
+    this._inputList.forEach((input) => {
+      input.value = data[input.name];
+    });
   }
 }
+

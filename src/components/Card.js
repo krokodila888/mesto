@@ -17,6 +17,7 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    this.likeButton = this._element.querySelector('.element__like-button');
     this._cardImage = this._element.querySelector('.element__photo');
     this._element.querySelector('.element__text').textContent = this._cardText;
     this._cardImage.src = this._cardUrl;
@@ -26,8 +27,6 @@ export class Card {
   }
 
   _setEventListeners() {
-    this.likeButton = this._element.querySelector('.element__like-button');
-
     this.likeButton.addEventListener('click', () => {
       this.likeButton.classList.toggle('element__like-button_active');
       }
@@ -37,7 +36,7 @@ export class Card {
       this._element.remove();
       }
     ); 
-    this._element.querySelector('.element__photo').addEventListener('click', () => {
+    this._cardImage.addEventListener('click', () => {
       this.handleCardClick(this._element)
       })
   }
