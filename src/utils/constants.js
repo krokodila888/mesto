@@ -25,6 +25,7 @@ export const nameSelector = '.profile__username';
 export const statusSelector = '.profile__status';
 export const popupAvatarSelector = '.popup_avatar';
 export const userAvatar = document.querySelector(".profile__avatar");
+export const avatarSelector = ".profile__avatar";
 export const inputAvatar = document.querySelector(".popup__input-avatar");
 export const popupRemoveSelector = '.popup_remove';
 export const removeConfirmButton = document.querySelector('.popup__remove-save-button');

@@ -1,5 +1,5 @@
 export class Card {
-  constructor(cardText, cardUrl, cardSelector, likesCounter,/**/ cardOwner, cardID, userID,/**/ { handleCardClick }, setLikes, deleteLikes, {confirmRemoving} ) {
+  constructor(cardText, cardUrl, cardSelector, likesCounter, cardOwner, cardID, userID, { handleCardClick }, setLikes, deleteLikes, {confirmRemoving} ) {
     this._cardText = cardText;
     this._cardUrl = cardUrl;
     this._cardSelector = cardSelector;
@@ -45,11 +45,10 @@ export class Card {
   _setEventListeners() {
     this.likeButton.addEventListener('click', () => {
       if (this.likeButton.classList.contains('element__like-button_active')) {
-        this.likeButton.classList.remove('element__like-button_active');
         this.deleteLikes(this._cardID);
       }
       else {
-        this.likeButton.classList.add('element__like-button_active');
+        //this.likeButton.classList.add('element__like-button_active');
         this.setLikes(this._cardID);
       }
     });
@@ -67,5 +66,6 @@ export class Card {
     this._item = item.likes;
     this._likesCounterRenew = this._item;
     this.likeCounter.textContent = this._likesCounterRenew.length;
+    this.likeButton.classList.toggle('element__like-button_active');
   }
 }

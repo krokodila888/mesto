@@ -1,20 +1,19 @@
 import { Card } from '../components/Card.js';
-import { PopupRemove } from '../components/PopupRemove.js';
+import { PopupWithConfirmation } from '../components/PopupWithConfirmation.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { Api } from '../components/Api.js';
-import { bazeUrl, authorization, removeConfirmForm, removeConfirmButton, popupRemoveSelector, userAvatar, inputAvatar, popupAvatarForm, popupAvatarSelector, enableValidationClasses, profileEditButton, popupProfileSelector, popupMestoSelector, profileAddButton, cardsHolder, popupMestoForm, popupProfileForm, cardSelector, popupPhotoSelector, nameSelector, statusSelector } from '../utils/constants.js';
+import { bazeUrl, authorization, removeConfirmForm, removeConfirmButton, popupRemoveSelector, userAvatar, avatarSelector, inputAvatar, popupAvatarForm, popupAvatarSelector, enableValidationClasses, profileEditButton, popupProfileSelector, popupMestoSelector, profileAddButton, cardsHolder, popupMestoForm, popupProfileForm, cardSelector, popupPhotoSelector, nameSelector, statusSelector } from '../utils/constants.js';
 import './index.css';
 
 let userID;
 
 //попапы и классы
 const api = new Api({ bazeUrl, authorization });
-const userInfo = ({name: nameSelector, about: statusSelector});
-const profile = new UserInfo(userInfo);
+const profile = new UserInfo(nameSelector, statusSelector, avatarSelector);
 const popupPicture = new PopupWithImage(popupPhotoSelector);
 popupPicture.setEventListeners();
 
@@ -27,7 +26,7 @@ function createCard(item) {
       })
       .catch((err) => {
         console.log(err);
-      })
+      })      
   }, () => {
     api.dislikeCard(item._id)
       .then((res) => {
@@ -36,7 +35,7 @@ function createCard(item) {
       .catch((err) => {
         console.log(err);
       })
-    }, 
+  }, 
     { confirmRemoving });
   const cardElement = card.generateCard();
   return cardElement;
@@ -54,13 +53,12 @@ Promise.all([api.getProfileInfo(), api.getInitialCards()])
   .then(([user, card]) => {
     userID = user._id;
     profile.setUserInfo(user);
-    userAvatar.src = user.avatar;
-    inputAvatar.value = user.avatar;
+    profile.setAvatarInfo(user);
     cardList.renderItem(card.reverse())})
   .catch(err => console.log(err))
   
 //удаление карточки: попап, листенеры, открытие, удаление
-const popupRemoveCard = new PopupRemove(popupRemoveSelector, handleConfirm);
+const popupRemoveCard = new PopupWithConfirmation(popupRemoveSelector, handleConfirm);
 popupRemoveCard.setEventListeners();
 
 function confirmRemoving(data, element) {
@@ -70,10 +68,15 @@ function confirmRemoving(data, element) {
 //подтверждение удаления и удаление
 function handleConfirm(data, element) {
   popupRemoveCard.renderLoading(true);
-  api.removeCard(data);
-  element.remove();
-  popupRemoveCard.renderLoading(false);
-  popupRemoveCard.close();
+  api.removeCard(data)
+    .then((res) => {
+      element.remove();
+      popupRemoveCard.close()
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+      popupRemoveCard.renderLoading(false)
+    })
 }
 
 //открытие попапа с фото
@@ -87,10 +90,17 @@ function handleCardClick(element) {
 const popupUserInfo = new PopupWithForm(popupProfileSelector, { 
   callback: (evt) => {
     evt.preventDefault();
+    popupUserInfo.renderLoading(true)
     const userNewData = popupUserInfo.getInputValues();
-    api.editUserInfo(userNewData);
-    profile.setUserInfo(userNewData);
-    popupUserInfo.close();
+    api.editUserInfo(userNewData)
+      .then((res) => {
+        profile.setUserInfo(res);
+        popupUserInfo.close();
+      })
+      .catch(err => console.log(err))
+      .finally(() => {
+        popupUserInfo.renderLoading(false)
+      })
   }
 });
 
@@ -100,24 +110,18 @@ const popupAvatar = new PopupWithForm(popupAvatarSelector, {
     evt.preventDefault();
     popupAvatar.renderLoading(true);
     const userNewAvatar = popupAvatar.getInputValues();
-    userAvatar.src = userNewAvatar.avatar;
-    api.changeAvatar(userNewAvatar.avatar);
-    popupAvatar.renderLoading(false);
-    popupAvatar.close();
+    api.changeAvatar(userNewAvatar.avatar)
+      .then((res) => {
+        profile.setAvatarInfo(res);
+        popupAvatar.close()
+      })
+      .catch(err => console.log(err))
+      .finally(() => {
+        popupAvatar.renderLoading(false)
+      })
   }
 });
 popupAvatar.setEventListeners();
-
-//добавление карточки
-function handleSubmitCard(data) {
-  api.postNewCard(data).then(res => {
-    const card = createCard(res);
-    cardList.addItem(card)
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-}
 
 //попап добавления карточки
 const popupAddCard = new PopupWithForm(popupMestoSelector, { 
@@ -125,9 +129,18 @@ const popupAddCard = new PopupWithForm(popupMestoSelector, {
     evt.preventDefault();
     popupAddCard.renderLoading(true);
     const inputValues = popupAddCard.getInputValues();
-    handleSubmitCard(inputValues);
-    popupAddCard.renderLoading(false);
-    popupAddCard.close();
+    //handleSubmitCard(inputValues);
+    api.postNewCard(inputValues)
+      .then(res => {
+        const card = createCard(res);
+        cardList.addItem(card);
+        popupAddCard.close();
+      })
+      .catch((err) => {
+        console.log(err)})
+      .finally(() => {
+      popupAddCard.renderLoading(false);
+    })
   }
 });
 

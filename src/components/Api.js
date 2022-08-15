@@ -19,7 +19,6 @@ export class Api {
       }
     })
     .then(this._handleResult)
-    //.then(res => {console.log(res)})
   } 
 
   getProfileInfo() {
@@ -42,7 +41,8 @@ export class Api {
           name: data.name,
           about: data.about
         })
-    }); 
+    })
+    .then(this._handleResult) 
   }
 
   postNewCard(data) {
