@@ -19,6 +19,7 @@ export class Api {
       }
     })
     .then(this._handleResult)
+    //.then(res => {console.log(res)})
   } 
 
   getProfileInfo() {
@@ -31,7 +32,7 @@ export class Api {
   }
 
   editUserInfo(data) {
-    fetch(`${this._bazeUrl}/users/me`, {
+    return fetch(`${this._bazeUrl}/users/me`, {
       method: 'PATCH',
       headers: {
         authorization: this._authorization,
@@ -45,7 +46,7 @@ export class Api {
   }
 
   postNewCard(data) {
-    fetch(`${this._bazeUrl}/cards`, {
+    return  fetch(`${this._bazeUrl}/cards`, {
       method: 'POST',
       headers: {
         authorization: this._authorization,
@@ -57,7 +58,7 @@ export class Api {
   }
  
   removeCard(cardID) {
-    fetch(`${this._bazeUrl}/cards/${cardID}`, {
+    return fetch(`${this._bazeUrl}/cards/${cardID}`, {
       method: 'DELETE',
       headers: {
         authorization: this._authorization
@@ -67,7 +68,7 @@ export class Api {
   }
   
   likeCard(cardID) {
-    fetch(`${this._bazeUrl}/cards/${cardID}/likes`, {
+    return  fetch(`${this._bazeUrl}/cards/${cardID}/likes`, {
       method: 'PUT',
       headers: {
         authorization: this._authorization
@@ -77,7 +78,7 @@ export class Api {
   }
 
   dislikeCard(cardID) {
-    fetch(`${this._bazeUrl}/cards/${cardID}/likes`, {
+    return fetch(`${this._bazeUrl}/cards/${cardID}/likes`, {
       method: 'DELETE',
       headers: {
         authorization: this._authorization
@@ -87,7 +88,7 @@ export class Api {
   }
 
   changeAvatar(data) {
-    fetch(`${this._bazeUrl}/users/me/avatar`, {
+    return fetch(`${this._bazeUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
         authorization: this._authorization,

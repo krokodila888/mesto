@@ -12,8 +12,8 @@ export class PopupRemove extends Popup {
   setEventListeners () {
     super.setEventListeners();
     this._popupForm.addEventListener("submit", (evt) => {
-        evt.preventDefault();
-        this._handleConfirm(this.data, this._element);
+      evt.preventDefault();
+      this._handleConfirm(this.data, this._element);
     });
   }
 
@@ -23,12 +23,12 @@ export class PopupRemove extends Popup {
     super.open();
   }
   
-   renderLoading(isLoading) {
+  renderLoading(isLoading) {
     if (isLoading) {
       this._saveButton.textContent = 'Сохранение...'
     }
     else {
       this._saveButton.textContent = this._initialText;
-      }
     }
+  }
 }

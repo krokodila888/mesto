@@ -1,5 +1,5 @@
 export class Card {
-  constructor(cardText, cardUrl, cardSelector, likesCounter,/**/ cardOwner, cardID, userID,/**/ { handleCardClick }, {setLikes}, {deleteLikes}, data, {confirmRemoving} ) {
+  constructor(cardText, cardUrl, cardSelector, likesCounter,/**/ cardOwner, cardID, userID,/**/ { handleCardClick }, setLikes, deleteLikes, {confirmRemoving} ) {
     this._cardText = cardText;
     this._cardUrl = cardUrl;
     this._cardSelector = cardSelector;
@@ -7,11 +7,11 @@ export class Card {
     this.handleCardClick = handleCardClick;
     this.setLikes = setLikes;
     this.deleteLikes = deleteLikes;
-    this.data = data;
     this.confirmRemoving = confirmRemoving;
     this._cardOwner = cardOwner._id;
     this._cardID = cardID;
     this._userID = userID;
+    this._data = this._cardID;
   }
 
   _getTemplate() {
@@ -45,22 +45,27 @@ export class Card {
   _setEventListeners() {
     this.likeButton.addEventListener('click', () => {
       if (this.likeButton.classList.contains('element__like-button_active')) {
-      this.likeButton.classList.remove('element__like-button_active');
-      this.deleteLikes(this.data);
-
-      this.likeCounter.textContent = (`${this.likeCounter.textContent - 1}`);
-    }
-      else {this.likeButton.classList.add('element__like-button_active');
-      this.setLikes(this.data);
-      this.likeCounter.textContent = + this.likeCounter.textContent + 1;
-      }}
-    );
-      this.removeButton.addEventListener('click', () => {
-      this.confirmRemoving(this.data, this._element);
+        this.likeButton.classList.remove('element__like-button_active');
+        this.deleteLikes(this._cardID);
+      }
+      else {
+        this.likeButton.classList.add('element__like-button_active');
+        this.setLikes(this._cardID);
+      }
+    });
+    
+    this.removeButton.addEventListener('click', () => {
+      this.confirmRemoving(this._data, this._element);
     }); 
 
     this._cardImage.addEventListener('click', () => {
       this.handleCardClick(this._element)
-      })
+    })
+  }
+
+  setLikesCounter(item) {
+    this._item = item.likes;
+    this._likesCounterRenew = this._item;
+    this.likeCounter.textContent = this._likesCounterRenew.length;
   }
 }
