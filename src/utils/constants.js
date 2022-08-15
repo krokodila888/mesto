@@ -31,4 +31,3 @@ export const removeConfirmButton = document.querySelector('.popup__remove-save-b
 export const removeConfirmForm = document.querySelector('.popup__remove-form-container');
 export const bazeUrl = 'https://mesto.nomoreparties.co/v1/cohort-47'; 
 export const authorization = '4d56a1ba-b22b-45b6-8032-4887d49b9594';
-export const id = '4b5db94c80af74c727757d37';
