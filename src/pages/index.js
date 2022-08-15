@@ -1,5 +1,5 @@
 import { Card } from '../components/Card.js';
-import { PopupRemove } from '../components/PopupRemove.js';
+import { PopupWithConfirmation } from '../components/PopupWithConfirmation.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
@@ -60,7 +60,7 @@ Promise.all([api.getProfileInfo(), api.getInitialCards()])
   .catch(err => console.log(err))
   
 //удаление карточки: попап, листенеры, открытие, удаление
-const popupRemoveCard = new PopupRemove(popupRemoveSelector, handleConfirm);
+const popupRemoveCard = new PopupWithConfirmation(popupRemoveSelector, handleConfirm);
 popupRemoveCard.setEventListeners();
 
 function confirmRemoving(data, element) {

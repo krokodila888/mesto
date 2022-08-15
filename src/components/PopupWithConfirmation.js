@@ -1,6 +1,6 @@
 import { Popup } from './Popup.js';
 
-export class PopupRemove extends Popup {
+export class PopupWithConfirmation extends Popup {
   constructor(popupSelector, handleConfirm) {
     super(popupSelector);
     this._handleConfirm = handleConfirm;
