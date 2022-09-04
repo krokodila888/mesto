@@ -1,5 +1,4 @@
 .page {
-  max-width: 1280px;
   margin: 0 auto;
   font-family: 'Inter', 'Arial', sans-serif;
   background: #000000;
@@ -10,4 +9,5 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
+  min-height: 100vh;
 }
